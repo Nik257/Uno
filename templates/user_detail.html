@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ user_det.nickname }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ user_det.nickname }}</h1>
+
+    <div class="alert alert-info" >
+        <p>{{ user_det.nickname }}</p>
+        <p>{{ user_det.first_name }}</p>
+        <p>{{ user_det.last_name }}</p>
+        <p>{{ user_det.gender }}</p>
+    </div>
+{% endblock %}

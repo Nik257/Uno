@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Add user
+{% endblock %}
+
+{% block body %}
+<h1>Add user</h1>
+<form method="post">
+    <input type="text" name="nickname" id="nickname" class="form-control" placeholder="Add nickname"><br>
+    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Add first_name"><br>
+    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Add last_name"><br>
+    <input type="text" name="gender" id="gender" class="form-control" placeholder="Add gender"><br>
+  <!--
+    <input type="date" name="birthday" id="birthday" class="form-control" placeholder="Add birthday"><br>
+  -->
+    <input type="submit"  class="btn btn-success" value="Add" ><br>
+
+</form>
+{% endblock %}
