@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Kons
+{% endblock %}
+
+{% block body %}
+<h1>Kons</h1>
+    {% for i in kon %}
+    <div class="alert alert-info" >
+        <td>{{ i.kon_id }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.round }}</td>
+        <td>{{ i.comment }}</td>
+
+
+    </div>
+    {% endfor %}
+{% endblock %}

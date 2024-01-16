@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Update user
+{% endblock %}
+
+{% block body %}
+<h1>Update user</h1>
+<form method="post">
+    <input type="text" name="nickname" id="nickname" class="form-control"  value="{{ user_det.nickname }}" placeholder="Add nickname"><br>
+    <input type="text" name="first_name" id="first_name" class="form-control" value="{{ user_det.first_name }}" placeholder="Add first_name"><br>
+    <input type="text" name="last_name" id="last_name" class="form-control" value="{{ user_det.last_name }}" placeholder="Add last_name"><br>
+    <input type="text" name="gender" id="gender" class="form-control"  value="{{ user_det.gender }}" placeholder="Add gender"><br>
+
+    <input type="date" name="birthday" id="birthday" class="form-control" value="{{ user_det.birthday }}" placeholder="Add birthday"><br>
+
+    <input type="submit"  class="btn btn-success" value="Update" ><br>
+
+</form>
+{% endblock %}

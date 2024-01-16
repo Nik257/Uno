@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Results
+{% endblock %}
+
+{% block body %}
+<h1>Results</h1>
+    {% for i in result %}
+    <div class="alert alert-info" >
+        <td>{{ i.user_id }}</td>
+        <td>{{ i.kon_id }}</td>
+        <td>{{ i.is_winner }}</td>
+        <td>{{ i.price }}</td>
+
+
+    </div>
+    {% endfor %}
+{% endblock %}
