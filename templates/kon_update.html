@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Update kon
+{% endblock %}
+
+{% block body %}
+<h1>{{ kon_det.kon_id }} редактирование </h1>
+<form method="post">
+
+    <input type="date" name="date" id="date" class="form-control" value="{{ kon_det.date }}" placeholder="Add date"><br>
+    <input type="text" name="round" id="round" class="form-control" value="{{ kon_det.round }}" placeholder="Add round"><br>
+    <input type="text" name="comment" id="comment" class="form-control" value="{{ kon_det.comment }}" placeholder="Add comment"><br>
+    <input type="submit"  class="btn btn-success" value="Update" ><br>
+
+</form>
+{% endblock %}

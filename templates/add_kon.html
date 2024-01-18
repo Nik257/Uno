@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Add kon
+{% endblock %}
+
+{% block body %}
+<h1>Add kon</h1>
+<form method="post">
+
+    <input type="date" name="date" id="date" class="form-control" placeholder="Add date game"><br>
+    <input type="text" name="round" id="round" class="form-control" placeholder="Add round"><br>
+    <input type="text" name="comment" id="comment" class="form-control" placeholder="Add comment"><br>
+
+    <input type="submit"  class="btn btn-success" value="Add" ><br>
+
+</form>
+{% endblock %}

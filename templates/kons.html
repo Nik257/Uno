@@ -7,12 +7,15 @@ Kons
 
 {% block body %}
 <h1>Kons</h1>
+<a class="btn btn-warning" href="/add_kon">Add game</a>
+
     {% for i in kon %}
     <div class="alert alert-info" >
         <td>{{ i.kon_id }}</td>
         <td>{{ i.date }}</td>
         <td>{{ i.round }}</td>
         <td>{{ i.comment }}</td>
+        <a href="/kons/{{ i.kon_id }}" class="btn btn-warning"> Details </a>
 
 
     </div>
