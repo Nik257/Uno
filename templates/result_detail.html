@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ result_det.result_id }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ result_det.result_id }}</h1>
+
+    <div class="alert alert-info" >
+        <p>{{ result_det.user_id }}</p>
+        <p>{{ result_det.kon_id }}</p>
+        <p>{{ result_det.resultat }}</p>
+        <p>{{ result_det.is_winner }}</p>
+        <p>{{ result_det.price }}</p>
+        <a href="/results/{{ result_det.result_id }}/delete" class="btn btn-danger"> Delete </a>
+
+    </div>
+{% endblock %}

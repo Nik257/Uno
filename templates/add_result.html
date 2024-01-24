@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Add result
+{% endblock %}
+
+{% block body %}
+<h1>Add result</h1>
+<form method="post">
+
+    <input type="text" name="user_id" id="user_id" class="form-control" placeholder="Add user id"><br>
+    <input type="text" name="kon_id" id="kon_id" class="form-control" placeholder="Add kon id"><br>
+    <input type="text" name="resultat" id="resultat" class="form-control" placeholder="Add resultat"><br>
+    <input type="text" name="is_winner" id="is_winner" class="form-control" placeholder="Add 1 if winner"><br>
+    <input type="text" name="price" id="price" class="form-control" placeholder="Add price"><br>
+
+    <input type="submit"  class="btn btn-success" value="Add" ><br>
+
+</form>
+{% endblock %}

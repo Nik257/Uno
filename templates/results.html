@@ -7,12 +7,17 @@ Results
 
 {% block body %}
 <h1>Results</h1>
+<a class="btn btn-warning" href="/add_result">Add result</a>
+
     {% for i in result %}
     <div class="alert alert-info" >
         <td>{{ i.user_id }}</td>
         <td>{{ i.kon_id }}</td>
+        <td>{{ i.resultat }}</td>
         <td>{{ i.is_winner }}</td>
         <td>{{ i.price }}</td>
+        <a href="/results/{{ i.result_id }}" class="btn btn-warning"> Details </a>
+
 
 
     </div>

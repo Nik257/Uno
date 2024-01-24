@@ -5,7 +5,6 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///game.db'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwert123@localhost/game1.db'
 db = SQLAlchemy(app)
 
 # таблица Юзеры
@@ -16,6 +15,7 @@ class User(db.Model):
     last_name = db.Column(db.String(45), nullable=True)
     gender = db.Column(db.String(1), nullable=True)
     birthday = db.Column(db.Date, nullable=False)
+    results = db.relationship('Result', backref='user', lazy=True)
 
 
     def __repr__(self):
@@ -27,26 +27,28 @@ class Kon(db.Model):
     date = db.Column(db.Date, nullable=False)
     round = db.Column(db.Integer, nullable=True)
     comment = db.Column(db.String(250), nullable=False)
+    results = db.relationship('Result', backref='kon', lazy=True)
 
     def __repr__(self):
         return '<Kon %r>' % self.kon_id
 
 # таблица результатов по играм
 class Result(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True)
-    kon_id = db.Column(db.Integer, primary_key=True)
-    result = db.Column(db.Integer,  nullable=True)
+    result_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    kon_id = db.Column(db.Integer, db.ForeignKey('kon.kon_id'), nullable=False)
+    resultat = db.Column(db.Integer,  nullable=True)
     is_winner = db.Column(db.Boolean, nullable=True)
     price = db.Column(db.Integer, nullable=True)
 
-    fk_user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
-    user = db.relationship('User', backref=db.backref('kons', lazy=True))
+    #fk_user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    #user = db.relationship('User', backref=db.backref('kons', lazy=True))
 
-    fk_kon = db.Column(db.Integer, db.ForeignKey('kon.kon_id'), nullable=False)
-    kon = db.relationship('Kon', backref=db.backref('results', lazy=True))
+    #fk_kon = db.Column(db.Integer, db.ForeignKey('kon.kon_id'), nullable=False)
+    #kon = db.relationship('Kon', backref=db.backref('results', lazy=True))
 
     def __repr__(self):
-        return '<Result %r>' % self.user_id
+        return '<Result %r>' % self.result_id
 
 @app.route('/')
 @app.route('/home')
@@ -183,21 +185,57 @@ def kon_update(kon_id):
     else:
         return render_template("kon_update.html", kon_det=kon_det)
 
+
+#страница результата
 @app.route('/results')
 def results():
-    result = Result.query.order_by(Result.user_id).all()
+    result = Result.query.order_by(Result.result_id).all()
     return render_template("results.html", result=result)
 
 
+# Добавление результата по игре через кнопку добавления
+@app.route('/add_result', methods=['POST', 'GET'])
+def add_result():
+    if request.method == "POST":
+        user_id = int(request.form['user_id'])
+        kon_id = int(request.form['kon_id'])
+        resultat = request.form['resultat']
+        is_winner = bool(request.form['is_winner'])
+        price = int(request.form['price'])
+        result = Result(user_id=user_id, kon_id=kon_id, resultat=resultat, is_winner=is_winner, price=price)
 
+        try:
+            db.session.add(result)
+            db.session.commit()
+            return redirect('/results')
+        except Exception as error:
+            print(error)
+            return "Add result was ERROR"
+    else:
+        return render_template("add_result.html")
+
+# детали по результате
+@app.route('/results/<int:result_id>')
+def result_detail(result_id):
+    result_det = Result.query.get(result_id)
+    return render_template("result_detail.html", result_det=result_det)
+
+
+
+# удаление результата из таблицы
+@app.route('/results/<int:result_id>/delete')
+def result_delete(result_id):
+    result_det = Result.query.get_or_404(result_id)
+
+    try:
+        db.session.delete(result_det)
+        db.session.commit()
+        return redirect('/results')
+    except:
+        return "Delete result was mistake"
 @app.route('/about')
 def about():
     return render_template("about.html")
-
-
-
-
-
 
 
 if __name__ == "__main__":
